@@ -259,7 +259,7 @@ async def show_help(_, m: Message):
 @Client.on_message(main_filter
                    & self_or_contact_filter
                    & current_vc
-                   & filters.command("skip", prefixes="!"))
+                   & filters.regex("^!(skip|s)"))
 async def skip_track(_, m: Message):
     playlist = mp.playlist
     if len(m.command) == 1:
@@ -290,7 +290,7 @@ async def skip_track(_, m: Message):
 
 @Client.on_message(main_filter
                    & self_or_contact_filter
-                   & filters.regex("^!join$"))
+                   & filters.regex("^!(join|j)$"))
 async def join_group_call(client, m: Message):
     group_call = mp.group_call
     group_call.client = client
@@ -304,7 +304,7 @@ async def join_group_call(client, m: Message):
 @Client.on_message(main_filter
                    & self_or_contact_filter
                    & current_vc
-                   & filters.regex("^!leave$"))
+                   & filters.regex("^!(leave|l)$"))
 async def leave_voice_chat(_, m: Message):
     group_call = mp.group_call
     mp.playlist.clear()
@@ -364,7 +364,7 @@ async def restart_playing(_, m: Message):
 @Client.on_message(main_filter
                    & self_or_contact_filter
                    & current_vc
-                   & filters.regex("^!pause"))
+                   & filters.regex("^!(pause|p)"))
 async def pause_playing(_, m: Message):
     mp.group_call.pause_playout()
     await mp.update_start_time(reset=True)
@@ -377,7 +377,7 @@ async def pause_playing(_, m: Message):
 @Client.on_message(main_filter
                    & self_or_contact_filter
                    & current_vc
-                   & filters.regex("^!resume"))
+                   & filters.regex("^!(resume|r)"))
 async def resume_playing(_, m: Message):
     mp.group_call.resume_playout()
     reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} resumed",
