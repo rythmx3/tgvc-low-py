@@ -259,7 +259,7 @@ async def show_help(_, m: Message):
 @Client.on_message(main_filter
                    & self_or_contact_filter
                    & current_vc
-                   & filters.regex("^!(skip|s)"))
+                   & filters.command(["skip", "s"], prefixes="!"))
 async def skip_track(_, m: Message):
     playlist = mp.playlist
     if len(m.command) == 1:
